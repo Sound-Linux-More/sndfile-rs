@@ -1,4 +1,4 @@
-#SoundFile ReSpectr.
+# SoundFile ReSpectr.
 
 ReSpectr wav file.
 
