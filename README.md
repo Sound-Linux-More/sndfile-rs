@@ -36,6 +36,10 @@ ReSpectr wav file.
 
 Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3
 
+bash sox-spectrogram-1.sh Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3
+
+!(Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3-spectrogram.png)[https://raw.githubusercontent.com/zvezdochiot/sndfile-rs/master/Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3-spectrogram.png]
+
 sox -S Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3 Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav
 
 Input File     : 'Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3'  
