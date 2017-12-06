@@ -34,7 +34,7 @@ ReSpectr wav file.
 
 ## Sample:
 
-Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3
+_Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3_
 
 bash sox-spectrogram-1.sh Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3
 
@@ -42,25 +42,25 @@ bash sox-spectrogram-1.sh Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika
 
 sox -S Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3 Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav
 
-Input File     : 'Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3'  
-Channels       : 2  
-Sample Rate    : 44100  
-Precision      : 16-bit  
-Duration       : 00:02:42.10 = 7148478 samples = 12157.3 CDDA sectors  
-File Size      : 2.59M  
-Bit Rate       : 128k  
-Sample Encoding: MPEG audio (layer I, II or III)  
-Comments       :   
-Title=Мёртвый воин (TorchProj&Черника)  
-Artist=Аксеаносилас  
-Album=Ряженка  
-Tracknumber=01/03  
-Year=2008  
-Genre=(20)  
-Discnumber=1  
+_Input File     : 'Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3'_  
+_Channels       : 2_  
+_Sample Rate    : 44100_  
+_Precision      : 16-bit_  
+_Duration       : 00:02:42.10 = 7148478 samples = 12157.3 CDDA sectors_  
+_File Size      : 2.59M_  
+_Bit Rate       : 128k_  
+_Sample Encoding: MPEG audio (layer I, II or III)_  
+_Comments       :_  
+_Title=Мёртвый воин (TorchProj&Черника)_  
+_Artist=Аксеаносилас_  
+_Album=Ряженка_  
+_Tracknumber=01/03_  
+_Year=2008_  
+_Genre=(20)_  
+_Discnumber=1_  
 
 sndfile-rs -m drs Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav  
-    Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav -> Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav ok [0.013643]
+    _Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav -> Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav ok [0.013643]_
 
 ![Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav-spectrogram.png](https://raw.githubusercontent.com/zvezdochiot/sndfile-rs/master/Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav-spectrogram.png)
 
