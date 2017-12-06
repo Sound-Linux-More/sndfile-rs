@@ -1,12 +1,12 @@
-SoundFile ReSpectr.
+#SoundFile ReSpectr.
 
 ReSpectr wav file.
 
-#Usege
+## Usage
 
  sndfile-rs [options] <filename> <outfilename>
 
-#Options:
+## Options:
 
 -m str	mode (string, optional, default = copy):
     copy - copy wav file,
@@ -22,7 +22,7 @@ ReSpectr wav file.
 
 -h	help
 
-#Exampe:
+## Exampe:
 
  sox -S -v 0.5 sample.mp3 sample.mp3.wav
  sndfile-rs -m drs sample.mp3.wav sample.mp3crs.wav
@@ -32,7 +32,7 @@ ReSpectr wav file.
  bash copymetascr.sh sample.mp3 sample.m4a # ! using ffmpeg
  rm *.wav *.aac
 
-Sample:
+## Sample:
 
 Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3
 
@@ -60,6 +60,6 @@ sndfile-rs -m drs Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav
 
 
 
-#COPYRIGHT
+## COPYRIGHT
 Copyright 2017 zezdochiot.
  All rights reserved.
