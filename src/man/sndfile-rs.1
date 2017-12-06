@@ -1,0 +1,67 @@
+.TH "Sndfile ReSpectr User Manual" 1 "22 Nov 2017" "Sndfile documentation"
+
+.SH NAME
+ soundfile-rs
+
+.SH DESCRIPTION
+ReSpectr wav file.
+
+.SH SYNOPSIS
+sndfile-rs [options] <filename> <outfilename>
+
+.SH OPTIONS
+.TP
+-m str
+mode
+(string, optional, default = copy):
+    copy - copy wav file,
+    drs - diff respectr wav file (main function),
+    crs - complite respectr wav filter,
+    rs - respectr wav filter,
+    pow2 - power 2 wav file,
+    sqrt - sqrt wav file,
+    diff - differencial wav file,
+    int - integral wav file.
+.TP
+-r
+reverse filter (bool, optional, default = false)
+.TP
+-h
+help
+
+.SH EXAMPLE
+ sox -S -v 0.5 sample.mp3 sample.mp3.wav
+ sndfile-rs -m drs sample.mp3.wav sample.mp3crs.wav
+ sox -S --norm sample.mp3crs.wav sample.mp3crsnorm.wav
+ faac -q 256 sample.mp3crsnorm.wav
+ MP4Box -add sample.mp3crsnorm.aac -copy sample.m4a
+ bash copymetascr.sh sample.mp3 sample.m4a # ! using ffmpeg
+ rm *.wav *.aac
+
+.SH COPYRIGHT
+Copyright 2017 zezdochiot.
+ All rights reserved.
+
+.SH SEE ALSO
+ sndfile-cmp,
+ sndfile-concat,
+ sndfile-convert,
+ sndfile-deinterleave,
+ sndfile-generate-chirp,
+ sndfile-info,
+ sndfile-interleave,
+ sndfile-jackplay,
+ sndfile-metadata-get,
+ sndfile-metadata-set,
+ sndfile-mix-to-mono,
+ sndfile-play,
+ sndfile-resample,
+ sndfile-spectrogram,
+ sndfile-waveform
+ sox,
+ faac,
+ MP4Box
+ ffmpeg.
+
+.SH CONTACTS
+ Email: zvezdochiot@users.sourceforge.net
