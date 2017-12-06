@@ -8,15 +8,15 @@ ReSpectr wav file.
 
 ## Options:
 
--m str	mode (string, optional, default = copy):
-    copy - copy wav file,
-    drs - diff respectr wav file (main function),
-    crs - complite respectr wav filter,
-    rs - respectr wav filter,
-    pow2 - power 2 wav file,
-    sqrt - sqrt wav file,
-    diff - differencial wav file,
-    int - integral wav file.
+-m str	mode (string, optional, default = copy):  
+    copy - copy wav file,  
+    drs - diff respectr wav file (main function),  
+    crs - complite respectr wav filter,  
+    rs - respectr wav filter,  
+    pow2 - power 2 wav file,  
+    sqrt - sqrt wav file,  
+    diff - differencial wav file,  
+    int - integral wav file.  
 
 -r	reverse filter (bool, optional, default = false)
 
