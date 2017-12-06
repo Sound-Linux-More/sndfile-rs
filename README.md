@@ -62,6 +62,8 @@ _Discnumber=1_
 sndfile-rs -m drs Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav  
     _Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3.wav -> Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav ok [0.013643]_
 
+bash sox-spectrogram-1.sh Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav
+
 ![Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav-spectrogram.png](https://raw.githubusercontent.com/zvezdochiot/sndfile-rs/master/Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika.mp3drs.wav-spectrogram.png)
 
 ## COPYRIGHT
