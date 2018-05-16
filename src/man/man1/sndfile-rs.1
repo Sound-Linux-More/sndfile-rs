@@ -1,4 +1,4 @@
-.TH "Sndfile ReSpectr User Manual" 1 "22 Nov 2017" "Sndfile documentation"
+.TH "Sndfile ReSpectr User Manual" 1 "16 May 2018" "Sndfile documentation"
 
 .SH NAME
  soundfile-rs
@@ -31,10 +31,10 @@ help
 
 .SH EXAMPLE
  sox -S -v 0.5 sample.mp3 sample.mp3.wav
- sndfile-rs -m drs sample.mp3.wav sample.mp3crs.wav
- sox -S --norm sample.mp3crs.wav sample.mp3crsnorm.wav
- faac -q 256 sample.mp3crsnorm.wav
- MP4Box -add sample.mp3crsnorm.aac -copy sample.m4a
+ sndfile-rs -m drs sample.mp3.wav sample.mp3drs.wav
+ sox -S --norm sample.mp3drs.wav sample.mp3drsnorm.wav
+ faac -q 256 sample.mp3drsnorm.wav
+ MP4Box -add sample.mp3drsnorm.aac -copy sample.m4a
  bash copymetascr.sh sample.mp3 sample.m4a # ! using ffmpeg
  rm *.wav *.aac
 
@@ -48,6 +48,7 @@ Copyright 2017 zezdochiot.
  sndfile-convert,
  sndfile-deinterleave,
  sndfile-generate-chirp,
+ sndfile-denoise,
  sndfile-info,
  sndfile-interleave,
  sndfile-jackplay,

@@ -1,0 +1,56 @@
+.TH "Sndfile DeNoise User Manual" 1 "16 May 2018" "Sndfile documentation"
+
+.SH NAME
+ soundfile-denoise
+
+.SH DESCRIPTION
+DeNoise wav file.
+
+.SH SYNOPSIS
+sndfile-denoise [options] <filename> <outfilename>
+
+.SH OPTIONS
+.TP
+-k N.N
+coefficient denoise (double, optional, default = 0.0[auto])
+.TP
+-h
+help
+
+.SH EXAMPLE
+ sox -S -v 0.5 sample.mp3 sample.mp3.wav
+ sndfile-denoise -m drs sample.mp3.wav sample.mp3dn.wav
+ sox -S --norm sample.mp3dn.wav sample.mp3dnnorm.wav
+ faac -q 256 sample.mp3dnnorm.wav
+ MP4Box -add sample.mp3dnnorm.aac -copy sample.m4a
+ bash copymetascr.sh sample.mp3 sample.m4a # ! using ffmpeg
+ rm *.wav *.aac
+
+.SH COPYRIGHT
+Copyright 2017 zezdochiot.
+ All rights reserved.
+
+.SH SEE ALSO
+ sndfile-cmp,
+ sndfile-concat,
+ sndfile-convert,
+ sndfile-deinterleave,
+ sndfile-generate-chirp,
+ sndfile-info,
+ sndfile-interleave,
+ sndfile-jackplay,
+ sndfile-metadata-get,
+ sndfile-metadata-set,
+ sndfile-mix-to-mono,
+ sndfile-play,
+ sndfile-resample,
+ sndfile-rs,
+ sndfile-spectrogram,
+ sndfile-waveform
+ sox,
+ faac,
+ MP4Box
+ ffmpeg.
+
+.SH CONTACTS
+ Email: zvezdochiot@users.sourceforge.net
