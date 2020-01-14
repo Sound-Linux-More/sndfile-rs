@@ -18,6 +18,7 @@ sndfile-rs [options] input.wav output.wav
         rs - respectr wav filter,  
         pow2 - power 2 wav file,  
         sqrt - sqrt wav file,  
+        kalman - kalman filter wav file,  
         diff - differencial wav file,  
         int - integral wav file.  
 
@@ -82,5 +83,5 @@ bash sox-spectrogram-1.sh Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika
 
 ## COPYRIGHT
 
-Copyright 2017 zezdochiot.  
+Copyright 2017-2020 zezdochiot.  
  All rights reserved.

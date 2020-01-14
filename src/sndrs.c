@@ -56,6 +56,7 @@ void usage ()
         puts ("                  rs - respectr wav file,");
         puts ("                  pow2 - power 2 wav file,");
         puts ("                  sqrt - sqrt wav file.");
+        puts ("                  kalman - kalman filter wav file,");
         puts ("                  diff - differencial wav file,");
         puts ("                  int - integral wav file.");
         puts ("          -r      reverse filter (bool, optional, default = false)");
@@ -206,11 +207,17 @@ static void sndrs_file (const char *infilename, const char *outfilename, int fmo
                     if (vals < 0) {vals = -vala;} else {vals = vala;}
                 break;
                 case 6:
+                    // kalman
+                    vals += mbval[c];
+                    vals *= 0.5;
+                    mbval[c] = vals;
+                break;
+                case 7:
                     // diff
                     vals -= mbval[c];
                     mbval[c] = val0;
                 break;
-                case 7:
+                case 8:
                     // integral
                     vals += mbval[c];
                     mbval[c] = vals;
@@ -224,7 +231,7 @@ static void sndrs_file (const char *infilename, const char *outfilename, int fmo
                     // mirror
                     vals = val0 + dval;
                 } else {
-                    if (fmode < 6)
+                    if (fmode < 7)
                     {
                         // invert
                         vals = -vals;
@@ -279,8 +286,9 @@ int main (int argc, char **argv)
                 if (strcmp(optarg, "rs") == 0) {fmode = 3;}
                 if (strcmp(optarg, "pow2") == 0) {fmode = 4;}
                 if (strcmp(optarg, "sqrt") == 0) {fmode = 5;}
-                if (strcmp(optarg, "diff") == 0) {fmode = 6;}
-                if (strcmp(optarg, "int") == 0) {fmode = 7;}
+                if (strcmp(optarg, "kalman") == 0) {fmode = 6;}
+                if (strcmp(optarg, "diff") == 0) {fmode = 7;}
+                if (strcmp(optarg, "int") == 0) {fmode = 8;}
             break;
             case 'r':
                 frev = 1;
