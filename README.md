@@ -83,5 +83,5 @@ bash sox-spectrogram-1.sh Axeanosilas-2008-01-Myortviy_voin-TorchProjandChernika
 
 ## COPYRIGHT
 
-Copyright 2017-2020 zezdochiot.  
- All rights reserved.
+Public Domain Mark 1.0  
+ No Copyright

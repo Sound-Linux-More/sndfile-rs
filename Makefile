@@ -1,11 +1,12 @@
-PROGNAME      = sndfile-rs sndfile-denoise
+PROGNAME      = sndfile-rs sndfile-denoise sndfile-las
 CC            = gcc
 CFLAGS        = -DUNIX -O2 -Wall
 LDFLAGS       = -s
-LIBS          = -lsndfile
+LIBS          = -lsndfile -lm
 VER           = 0
-VERB          = 20171122
+VERB          = 20210322
 COMMON        = 
+SRCS          = src
 PREFIX        = /usr/local
 INCPREFIX     = $(PREFIX)/include
 LIBPREFIX     = $(PREFIX)/lib
@@ -20,13 +21,15 @@ all: $(PROGNAME)
 clean:
 	rm -f $(PROGNAME)
 
-sndfile-rs: sndrs.c $(COMMON)
+sndfile-rs: $(SRCS)/sndrs.c $(COMMON)
 	$(CC) $(CFLAGS) $(LIBS) $^ $(LDFLAGS) -o $@
 
-sndfile-denoise: snddenoise.c $(COMMON)
+sndfile-denoise: $(SRCS)/snddenoise.c $(COMMON)
+	$(CC) $(CFLAGS) $(LIBS) $^ $(LDFLAGS) -o $@
+
+sndfile-las: $(SRCS)/zxfft/zx_fft.c $(SRCS)/zxfft/zx_math.c $(SRCS)/sndlas.c $(COMMON)
 	$(CC) $(CFLAGS) $(LIBS) $^ $(LDFLAGS) -o $@
 
 install: $(PROGNAME)
 	$(INSTALL) -d $(PREFIX)/bin
-	$(INSTALL) -m 0755 sndfile-rs $(PREFIX)/bin/
-	$(INSTALL) -m 0755 sndfile-denoise $(PREFIX)/bin/
+	$(INSTALL) -m 0755 $(PROGNAME) $(PREFIX)/bin/

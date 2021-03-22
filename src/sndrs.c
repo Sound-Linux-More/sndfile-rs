@@ -1,33 +1,11 @@
 /*
-** Copyright (C) 2002-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** sndrs.c
 **
-** All rights reserved.
+** Public Domain Mark 1.0
+** No Copyright
 **
-** Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**
-**     * Redistributions of source code must retain the above copyright
-**       notice, this list of conditions and the following disclaimer.
-**     * Redistributions in binary form must reproduce the above copyright
-**       notice, this list of conditions and the following disclaimer in
-**       the documentation and/or other materials provided with the
-**       distribution.
-**     * Neither the author nor the names of any contributors may be used
-**       to endorse or promote products derived from this software without
-**       specific prior written permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-** TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-** PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-** CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-** EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-** PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-** OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-** OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-** ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+** Depends:
+** 1) libsndfile
 */
 
 #include <unistd.h>
@@ -43,37 +21,36 @@
 
 static void sndrs_file (const char *infilename, const char *outfilename, int fmode, int frev) ;
 
-void usage ()
+void usage (const char *progname)
 {
-        puts ("\nSndRS: ReSpectr wav file.\n") ;
-        puts ("    Usage : sndfile-rs [options] <filename> <outfilename>") ;
-        puts ("           options:") ;
-        puts ("          -m str  mode (str, optional, default = copy)");
-        puts ("             mode:");
-        puts ("                  copy - copy wav file,)");
-        puts ("                  drs - diff respectr wav file (main function),");
-        puts ("                  crs - complite respectr wav file,");
-        puts ("                  rs - respectr wav file,");
-        puts ("                  pow2 - power 2 wav file,");
-        puts ("                  sqrt - sqrt wav file.");
-        puts ("                  kalman - kalman filter wav file,");
-        puts ("                  diff - differencial wav file,");
-        puts ("                  int - integral wav file.");
-        puts ("          -r      reverse filter (bool, optional, default = false)");
-        puts ("          -h      this help\n");
+    printf ("\nSndRS: ReSpectr wav file.\n") ;
+    printf ("    Usage : %s [options] <filename> <outfilename>\n", progname) ;
+    printf ("           options:\n") ;
+    printf ("          -m str  mode (str, optional, default = copy)\n");
+    printf ("             mode:\n");
+    printf ("                  copy - copy wav file,)\n");
+    printf ("                  drs - diff respectr wav file (main function),\n");
+    printf ("                  crs - complite respectr wav file,\n");
+    printf ("                  rs - respectr wav file,\n");
+    printf ("                  pow2 - power 2 wav file,\n");
+    printf ("                  sqrt - sqrt wav file,\n");
+    printf ("                  kalman - kalman filter wav file,\n");
+    printf ("                  diff - differencial wav file,\n");
+    printf ("                  int - integral wav file.\n");
+    printf ("          -r      reverse filter (bool, optional, default = false)\n");
+    printf ("          -h      this help\n");
 }
 
 static void sndrs_file (const char *infilename, const char *outfilename, int fmode, int frev)
 {
-    static float buffer [BUFFER_LEN] ;
-    float bufferout [BUFFER_LEN] ;
+    static double buffer [BUFFER_LEN] ;
+    double bufferout [BUFFER_LEN] ;
 
     SNDFILE *infile, *outfile ;
     SF_INFO sfinfo ;
     int c, k, readcount, channels;
     long int n = 0;
-    float val;
-    double val0, vals, vala, dval;
+    double val, val0, vals, vala, dval;
     double rval = 0, tval = 0, vsum = 0.0;
     double mbval[CHANNEL_LEN], mcval[CHANNEL_LEN], meval[CHANNEL_LEN], mfval[CHANNEL_LEN];
 
@@ -108,11 +85,11 @@ static void sndrs_file (const char *infilename, const char *outfilename, int fmo
     }
     channels = sfinfo.channels;
     c = 0;
-    while ((readcount = sf_read_float (infile, buffer, BUFFER_LEN)) > 0)
+    while ((readcount = sf_read_double (infile, buffer, BUFFER_LEN)) > 0)
     {
-        for (k = 0; k < BUFFER_LEN; k++)
+        for (k = 0; k < readcount; k++)
         {
-            val0 = (double)buffer[k];
+            val0 = buffer[k];
             vals = val0;
             switch(fmode)
             {
@@ -245,14 +222,14 @@ static void sndrs_file (const char *infilename, const char *outfilename, int fmo
             dval *= dval;
             vsum += dval;
             n++;
-            val = (float)vals;
+            val = vals;
             if (val < -1.0) {val = -1.0;}
             if (val > 1.0) {val = 1.0;}
             bufferout[k] = val;
             c++;
             if (c > channels - 1) {c = 0;}
         }
-        sf_write_float (outfile, bufferout, readcount) ;
+        sf_write_double (outfile, bufferout, readcount) ;
     }
     vsum *= 2;
     vsum /= n;
@@ -267,7 +244,6 @@ static void sndrs_file (const char *infilename, const char *outfilename, int fmo
     }
     printf ("ok [%f]\n", vsum);
 
-    return ;
 } /* sndrs_file */
 
 int main (int argc, char **argv)
@@ -307,7 +283,7 @@ int main (int argc, char **argv)
     
     if(optind + 2 > argc || fhelp > 0)
     {
-        usage();
+        usage(argv[0]);
         return 1;
     }
 

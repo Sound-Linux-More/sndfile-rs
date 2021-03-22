@@ -1,5 +1,5 @@
 SoundFile ReSpectr.
-0.20171122
+0.20210322
 
 Download
 --------
@@ -20,7 +20,6 @@ Build
 To build this utils type the following:
 
   cd [sndfile-rs/source/path]
-  cd src
   make
 
 Test
@@ -29,7 +28,6 @@ Test
 To test this utils type the following:
 
   cd [sndfile-rs/source/path]
-  cd src
   ./sndfile-rs -m drs <wav_in> <wav_out>
 
 Installation
@@ -38,7 +36,6 @@ Installation
 To install this utils type the following:
 
   cd [imthreshold/source/path]
-  cd src
   sudo make install
 
 Copyright and licence

@@ -1,33 +1,11 @@
 /*
-** Copyright (C) 2002-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** snddenoise.c
 **
-** All rights reserved.
+** Public Domain Mark 1.0
+** No Copyright
 **
-** Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**
-**     * Redistributions of source code must retain the above copyright
-**       notice, this list of conditions and the following disclaimer.
-**     * Redistributions in binary form must reproduce the above copyright
-**       notice, this list of conditions and the following disclaimer in
-**       the documentation and/or other materials provided with the
-**       distribution.
-**     * Neither the author nor the names of any contributors may be used
-**       to endorse or promote products derived from this software without
-**       specific prior written permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-** TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-** PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-** CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-** EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-** PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-** OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-** OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-** ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+** Depends:
+** 1) libsndfile
 */
 
 #include <unistd.h>
@@ -44,25 +22,25 @@
 
 static void snddenoise_file (const char *infilename, const char *outfilename, double kdenoise) ;
 
-void usage ()
+void usage (const char *progname)
 {
-        puts ("\nSndDeNoise: DeNoise wav file.\n") ;
-        puts ("    Usage : sndfile-denoise [options] <filename> <outfilename>") ;
-        puts ("           options:") ;
-        puts ("          -k N.N  coefficient denoise (double, optional, default = 0.0[auto])");
-        puts ("          -h      this help\n");
+    printf ("\nSndDeNoise: DeNoise wav file.\n") ;
+    printf ("    Usage : %s [options] <filename> <outfilename>\n", progname) ;
+    printf ("           options:\n") ;
+    printf ("          -k N.N  coefficient denoise (double, optional, default = 0.0[auto])\n");
+    printf ("          -h      this help\n");
 }
 
 static void snddenoise_file (const char *infilename, const char *outfilename, double kdenoise)
 {
-    static float buffer [BUFFER_LEN] ;
-    float bufferout [BUFFER_LEN] ;
+    static double buffer [BUFFER_LEN] ;
+    double bufferout [BUFFER_LEN] ;
 
     SNDFILE *infile, *outfile ;
     SF_INFO sfinfo ;
     unsigned c, k, readcount, channels, n = 0;
-    float val;
-    double kdn, korigin, val0, vald, valdi, valp, kn, kp, vd, vsumo = 0.0, vsumd = 0.0, vsum = 0.0;;
+    double val, kdn, korigin, val0, vald, valdi, valp, kn, kp, vd;
+    double vsumo = 0.0, vsumd = 0.0, vsum = 0.0;;
     unsigned valpi;
     double mva[CHANNEL_LEN], mvd[CHANNEL_LEN];
     double vdelta[DELTA_LEN];
@@ -106,11 +84,11 @@ static void snddenoise_file (const char *infilename, const char *outfilename, do
     kdn /= 2;
     c = 0;
     n = 0;
-    while ((readcount = sf_read_float (infile, buffer, BUFFER_LEN)) > 0)
+    while ((readcount = sf_read_double (infile, buffer, BUFFER_LEN)) > 0)
     {
-        for (k = 0; k < BUFFER_LEN; k++)
+        for (k = 0; k < readcount; k++)
         {
-            val0 = (double)buffer[k];
+            val0 = buffer[k];
             vald = val0;
             vald -= mva[c];
             vd = vald;
@@ -163,11 +141,11 @@ static void snddenoise_file (const char *infilename, const char *outfilename, do
         }
         channels = sfinfo.channels;
         c = 0;
-        while ((readcount = sf_read_float (infile, buffer, BUFFER_LEN)) > 0)
+        while ((readcount = sf_read_double (infile, buffer, BUFFER_LEN)) > 0)
         {
-            for (k = 0; k < BUFFER_LEN; k++)
+            for (k = 0; k < readcount; k++)
             {
-                val0 = (double)buffer[k];
+                val0 = buffer[k];
                 vald = val0;
                 vald -= mva[c];
                 valp = mvd[c];
@@ -222,11 +200,11 @@ static void snddenoise_file (const char *infilename, const char *outfilename, do
     }
     channels = sfinfo.channels;
     c = 0;
-    while ((readcount = sf_read_float (infile, buffer, BUFFER_LEN)) > 0)
+    while ((readcount = sf_read_double (infile, buffer, BUFFER_LEN)) > 0)
     {
-        for (k = 0; k < BUFFER_LEN; k++)
+        for (k = 0; k < readcount; k++)
         {
-            val0 = (double)buffer[k];
+            val0 = buffer[k];
             vald = val0;
             vald -= mva[c];
             valp = mvd[c];
@@ -244,7 +222,7 @@ static void snddenoise_file (const char *infilename, const char *outfilename, do
             vald = mva[c];
             vald -= val0;
             vald *= vald;
-            val = (float)val0;
+            val = val0;
             if (val < -1.0) {val = -1.0;}
             if (val > 1.0) {val = 1.0;}
             bufferout[k] = val;
@@ -252,7 +230,7 @@ static void snddenoise_file (const char *infilename, const char *outfilename, do
             c++;
             if (c > channels - 1) {c = 0;}
         }
-        sf_write_float (outfile, bufferout, readcount) ;
+        sf_write_double (outfile, bufferout, readcount) ;
     }
 
     vsum *= 2;
@@ -264,7 +242,6 @@ static void snddenoise_file (const char *infilename, const char *outfilename, do
 
     printf ("ok [%f]\n", vsum);
     
-    return ;
 } /* sndrs_file */
 
 int main (int argc, char **argv)
@@ -293,7 +270,7 @@ int main (int argc, char **argv)
     
     if(optind + 2 > argc || fhelp > 0)
     {
-        usage();
+        usage(argv[0]);
         return 1;
     }
 

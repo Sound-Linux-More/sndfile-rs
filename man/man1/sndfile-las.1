@@ -1,0 +1,64 @@
+.TH "Sndfile LAS" 1 0.20210322 "22 Mar 2021" "User Manual"
+
+.SH NAME
+soundfile-las
+
+.SH DESCRIPTION
+Lossy Audio Spotter wav file.
+
+.SH SYNOPSIS
+sndfile-las [options] <filename>
+
+.SH OPTIONS
+.TP
+-f N
+treshold fall (default = 5)
+.TP
+-l N.N
+threshold value last (default = 1.500000)
+.TP
+-n N.N
+threshold value next (default = 3.000000)
+.TP
+-e N.N
+threshold value final (default = 25.000000)
+.TP
+-h
+help
+
+.SH EXAMPLE
+ sox -S -v 0.5 sample.mp3 sample.mp3.wav
+ sndfile-rs -m drs sample.mp3.wav sample.mp3drs.wav
+ sndfile-las sample.mp3.wav
+ sndfile-las sample.mp3drs.wav
+ rm *.wav
+
+.SH COPYRIGHT
+Public Domain Mark 1.0
+ No Copyright
+
+.SH SEE ALSO
+ sndfile-cmp,
+ sndfile-concat,
+ sndfile-convert,
+ sndfile-deinterleave,
+ sndfile-generate-chirp,
+ sndfile-denoise,
+ sndfile-info,
+ sndfile-interleave,
+ sndfile-jackplay,
+ sndfile-metadata-get,
+ sndfile-metadata-set,
+ sndfile-mix-to-mono,
+ sndfile-play,
+ sndfile-resample,
+ sndfile-rs,
+ sndfile-spectrogram,
+ sndfile-waveform
+ sox,
+ faac,
+ MP4Box
+ ffmpeg.
+
+.SH CONTACTS
+ Email: zvezdochiot@users.sourceforge.net
