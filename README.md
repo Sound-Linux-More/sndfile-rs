@@ -1,3 +1,9 @@
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Sound-Linux-More/sndfile-rs)
+![GitHub Release Date](https://img.shields.io/github/release-date/Sound-Linux-More/sndfile-rs)
+![GitHub repo size](https://img.shields.io/github/repo-size/Sound-Linux-More/sndfile-rs)
+![GitHub all releases](https://img.shields.io/github/downloads/Sound-Linux-More/sndfile-rs/total)
+![GitHub](https://img.shields.io/github/license/Sound-Linux-More/sndfile-rs)
+
 # SoundFile ReSpectr.
 
 ReSpectr wav file.
