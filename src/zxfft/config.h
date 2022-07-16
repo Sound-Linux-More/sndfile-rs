@@ -47,7 +47,9 @@ typedef double                            fp64_t;
 #include <stdint.h>
 #endif  // #ifndef __stdint_h
 
+#ifndef _BITS_STDINT_INTN_H
 typedef long long                         int64_t;
+#endif
 
 typedef struct {
     float real;

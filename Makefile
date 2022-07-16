@@ -1,8 +1,7 @@
 PROGNAME      = sndfile-rs sndfile-denoise sndfile-las
 CC            = gcc
 CFLAGS        = -DUNIX -O2 -Wall
-LDFLAGS       = -s
-LIBS          = -lsndfile -lm
+LDFLAGS       = -lsndfile -lm -s
 VER           = 0
 VERB          = 20210322
 COMMON        = 
@@ -22,13 +21,13 @@ clean:
 	rm -f $(PROGNAME)
 
 sndfile-rs: $(SRCS)/sndrs.c $(COMMON)
-	$(CC) $(CFLAGS) $(LIBS) $^ $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
 sndfile-denoise: $(SRCS)/snddenoise.c $(COMMON)
-	$(CC) $(CFLAGS) $(LIBS) $^ $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
 sndfile-las: $(SRCS)/zxfft/zx_fft.c $(SRCS)/zxfft/zx_math.c $(SRCS)/sndlas.c $(COMMON)
-	$(CC) $(CFLAGS) $(LIBS) $^ $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
 install: $(PROGNAME)
 	$(INSTALL) -d $(PREFIX)/bin
